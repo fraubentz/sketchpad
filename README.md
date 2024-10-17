@@ -1,0 +1,1 @@
+This is a browser version of a sketchpad, made using HTML, CSS and JavaScript. 
