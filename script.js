@@ -1,8 +1,12 @@
 let container = document.querySelector(".container");
+let button = document.querySelector("#getValue");
+let defaultValue = 16;
 
+populateGrid(defaultValue);
 
 function populateGrid(num) {
     const squareSize = 600 / num;
+    clearGrid();
     for (let i = 0; i < (num*num); i++) {
         const square = document.createElement("div");
         square.classList.add("square");
@@ -14,14 +18,6 @@ function populateGrid(num) {
         //console.log("square");
         container.appendChild(square);
     }
-}
-
-function getValue() {
-    //let inputField = document.querySelector(".valueSquares");
-    //let value = inputField.value;
-    let value = prompt("Please enter the number of squares per side you want:");
-    clearGrid();
-    populateGrid(value);
 }
 
 function clearGrid() {
@@ -36,11 +32,17 @@ function randomRGB() {
 }
 
 container.addEventListener("mouseover", (event) => {
-    let colour = randomRGB();
-    console.log(colour);
-    event.target.style.backgroundColor = colour;
-    
+    event.target.style.backgroundColor = randomRGB();
+    event.target.style.opacity = Math.random();
 });
 
+button.addEventListener("click", () => {
+    let value = parseInt(prompt("Please enter the number of squares per side you want (between 1 and 100):"));
+    
+    if (value > 100) {
+        alert("Sorry. Only between 1 and 100 is allowed. Please choose again.");
+    } else {
+        populateGrid(value);
+    }
+});
 
-populateGrid(16);
